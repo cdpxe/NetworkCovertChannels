@@ -6,7 +6,8 @@ Please see [my website](http://steffen-wendzel.blogspot.com/p/covert-channel-sof
 
 ## In this repository:
 
-- [phcct](phcct/): *Protocol Hopping Covert Channel Tool* (`phcct` was the first (2007) implementation of a protocol hopping covert channel (also known as protocol switching covert channel).
+- [pct](pct/): *Protocol Channel Tool* (`pct` a PoC implementation to show that so-called protocol channels are feasible.
+- [phcct](phcct/): *Protocol Hopping Covert Channel Tool* (`phcct` was the first (2007) implementation of a protocol hopping covert channel)
 
 ## My other covert channel projects on GitHub
 
