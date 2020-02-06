@@ -1,5 +1,6 @@
 # NetworkCovertChannels
-Some network covert channel projects of my own research
+
+Some network covert channel projects of my own research. Please see [my website](http://steffen-wendzel.blogspot.com/p/covert-channel-software.html) for an explanation of these tools.
 
 This project contains some covert channel projects and also refers to some other repositories where I host additional covert channel projects.
 
