@@ -1,6 +1,6 @@
 # PHCCT – *Protocol Hopping Covert Channel Tool*
 
-This is a simple (and the first) implementation of a *protocol switching covert channel* (PHCC). It was written in 2007. Publications and more information on this type of covert channel can be found [on my website](https://steffen-wendzel.blogspot.com/p/covert-channel-software.html#phcct).
+This is a simple and the first implementation of a *protocol switching covert channel* (PHCC). It was written in 2007. Publications and more information on this type of covert channel can be found [on my website](https://steffen-wendzel.blogspot.com/p/covert-channel-software.html#phcct).
 
 ## Usage
 
