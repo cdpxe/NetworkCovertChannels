@@ -6,7 +6,7 @@ Please see [my website](http://steffen-wendzel.blogspot.com/p/covert-channel-sof
 
 ## In this repository:
 
-- TODO
+- [phcct](phcct/): *Protocol Hopping Covert Channel Tool* (`phcct` was the first (2007) implementation of a protocol hopping covert channel (also known as protocol switching covert channel).
 
 ## My other covert channel projects on GitHub
 
