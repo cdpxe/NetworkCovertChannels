@@ -6,8 +6,8 @@ Please see [my website](http://steffen-wendzel.blogspot.com/p/covert-channel-sof
 
 ## In this repository:
 
-- [pct](pct/): *Protocol Channel Tool* (`pct` a PoC implementation to show that so-called protocol channels are feasible.
-- [phcct](phcct/): *Protocol Hopping Covert Channel Tool* (`phcct` was the first (2007) implementation of a protocol hopping covert channel)
+- [pct](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct): *Protocol Channel Tool* (`pct` a PoC implementation to show that so-called protocol channels are feasible.
+- [phcct](https://github.com/cdpxe/NetworkCovertChannels/tree/master/phcct): *Protocol Hopping Covert Channel Tool* (`phcct` was the first (2007) implementation of a protocol hopping covert channel)
 
 ## My other covert channel projects on GitHub
 
