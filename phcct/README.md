@@ -19,3 +19,9 @@ To transfer data from `alice` to `bob`, connect locally to TCP port 9999 and sen
 
 - A more sophisticated covert channel is one that actively probes for non-blocked network protocols, see my tool [NELphase](https://github.com/cdpxe/NELphase/).
 
+## Open Tasks
+
+- add encryption
+- add support for additional protocols
+- add a packet mixing mode
+- kernel based implementation
