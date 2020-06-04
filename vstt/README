@@ -1,0 +1,39 @@
+vstt [Very Strange Tunneling Tool]
+(c) 2006 and 2016 by Steffen 'cdp_xe' Wendzel
+	http: www.wendzel.de
+
+DISCLAIMER
+==========
+
+This tool is for legal purposes only! Read the LICENSE
+file for license details.
+
+INTRODUCTION
+============
+
+vstt is a multi-protocol tunneling tool for some free
+unix-like operating systems. it can tunnel TCP
+connections through different network protocols,
+including ICMP and POP3.
+
+HOW TO COMPILE
+==============
+
+Run the following command:
+
+OS        |  COMMAND
+-----------------------
+linux+bsd |  make
+solaris   |  make solaris
+other unix|  try both :-)
+
+HOW TO INSTALL
+==============
+
+Run 'make install'
+
+DOCUMENTATION
+=============
+
+You can find the documentation in the doc/.
+

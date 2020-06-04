@@ -1,0 +1,82 @@
+0.5.4 : in progress
+	- documentation fixes
+
+0.5.3 : 24.10.2016
+	- another code cleanup of the worst horrible stuff that I
+	  wrote ten years ago
+
+0.5.2 : 23.10.2016
+	- performed a few fixes in the documentation
+
+0.5.1 : 04.06.2016
+	- URL fixes in doc/doc.tex
+	- cleanup of the ugliest old and crappy code parts; did not
+	  touch that code for ~10 years
+
+0.5.0 : 06.10.2006
+	- Makefile: added 'install' target
+	- vstt can now start s2f: 2 new vstt parameters:
+		1. -c <port>. You can use it to specify the local
+		   listen/connect port for s2f. This parameter
+		   starts s2f (in client mode, if -s is not
+		   given).
+		2. -s. This parameter starts s2f in server mode.
+
+0.4.5 : 25.09.2006
+	- ICMP reliability implemented
+	- code cleanup for beta version
+
+0.4.0 : 21.09.2006
+	- implemented ICMP protocol
+		- base code
+		- send icmp messages
+		- icmp receive function implemented
+		- icmp data handling implemented (sent too large pkts
+		  in many small pkts)
+	- s2f now uses auto-config for input/output fifos from main.h
+	  like the rest of vstt code already did. in clear this means,
+	  that a user doesn't has to call s2f with -i <fifoA> -o
+	  <fifoB> in future, what makes it much simplier to use s2f!
+
+0.3.0 : 18.09.2006
+	- implemented peudo protocol "none". it is very fast because
+	  it sends the plain-data. use this, if you don't have to hide
+	  and just want to tunnel a connection trough other ports.
+	- Makefile fix: remove 'writer' too while doing the 'clean'
+	  target
+	- added documentation in doc/ including doc.tex, Makefile and
+	  a pre-compiled doc.pdf for the user.
+
+0.2.0 : 31.08.2006
+	- udp client/server/peer system implemented
+	- new tool: reader (just for debugging and playing around)
+	- new tool: s2f to connecting sockets with fifos as clients
+	  and servers. I made a first pop3 tunnel test using s2f this
+	  combination:
+	  
+	  On the smtp server, s2f connects as client to the 
+	  smtp-server and talks with it. it accepts data from and
+	  sends data to vstt (using fifos), what sends it to the
+	  telnet client host using the pop3 tunnel.
+	  
+	  On the telnet client host, vstt talks with the s2f tool
+	  running as server. this is needed because the telnet client
+	  has to connect to it.
+	  
+	  this makes a connection possibly on a cool way. the smtp
+	  server is only accessible at IP 127.0.0.1, not via the
+	  network interface, so nobody can connect to it from a remote
+	  connection. but since the s2f-client runs localy on the
+	  SMTP-server, the telnet host can connect to it using vstt.
+	  
+/---- SMTP-SERVER (listen() on localhost) ----\  [vstt-pop3-tun] /-------- TELNET CLIENT HOST -------------\
+| smtp-server  <---> s2f (as client) <--> vstt-+----------------+-vstt <--> s2f (as server) <--> telnet cli.|
+\---------------------------------------------/                  \------------------------------------------/
+
+0.1.0 : 28.08.2006
+	- base system done
+	- tcp client/server/peer system implemented: implemented a
+	  full duplex connection using 2 servers + 2 clients for each
+	  tunnel (transparent for the user)
+	- pop3 tunneling implemented
+

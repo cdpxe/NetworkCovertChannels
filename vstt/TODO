@@ -1,0 +1,13 @@
+- implement udp:dns tunnel
+- deamon mode
+- re-connect
+(- use GNU autotools)
+- Port it to Solaris x86
+(- Port it to big endian platforms)
+- find+fix the bug in the POP3 tunnel stuff that happens if you tunnel SSH over POP3 (yeah, that's only for heros)
+- implement ICMPv6 tunnels
+- (strong) encryption
+
+
+//- implement ipv4 icmp source route tunnel
+//  (if possibly)
