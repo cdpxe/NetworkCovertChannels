@@ -1,7 +1,7 @@
 /*
  * This is the vstt Sourcecode - http://wendzel.de
  *
- * Copyright (c) 2006,2016 Steffen Wendzel, www.wendzel.de
+ * Copyright (c) 2006,2016,2020 Steffen Wendzel, www.wendzel.de
  *       - All rights reserved.
  *
  *
@@ -387,8 +387,10 @@ fork_childs()
 			pid_s2f = fork();
 			if (pid_s2f < 0)
 				err(1, "fork()");
-			if (pid_s2f == 0) /* child starts s2f */
-				run_s2f();
+			if (pid_s2f == 0) { /* child starts s2f */
+				run_s2f(); /* replaces child process */
+				/* NOTREACHED */
+			}
 		}
 		
 		/* init the protocol server */

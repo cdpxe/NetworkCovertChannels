@@ -1,7 +1,7 @@
 /*
  * This is the vstt Sourcecode - http://wendzel.de
  *
- * Copyright (c) 2006,2016 Steffen Wendzel, www.wendzel.de
+ * Copyright (c) 2006,2016,2020 Steffen Wendzel, www.wendzel.de
  *       - All rights reserved.
  *
  *
@@ -52,7 +52,7 @@
 #endif
 
 #define VSTT_VERSION		"0.5.3"
-#define VSTT_PATCHLEVEL		"p0"
+#define VSTT_PATCHLEVEL		"p1"
 #define VSTT_VER		VSTT_VERSION VSTT_PATCHLEVEL
 
 /* fifo paths */
@@ -63,7 +63,7 @@
    #define RECVFPEER_FIFO	"/tmp/.vstt_recvfpeer"
 #endif
 
-#define S2F_PATH		"/usr/sbin/s2f"
+#define S2F_PATH		"/usr/sbin/s2f"	/* should be /usr/local/[s]bin; also should not be hard-coded; however, this is just a PoC */
 
 #define max(a,b)		(a > b ? a : b)
 
