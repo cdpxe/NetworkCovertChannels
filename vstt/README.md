@@ -1,20 +1,16 @@
-# vstt [Very Strange Tunneling Tool]
+# vstt (*very strange tunneling tool*)
 
 (c) 2006, 2016, 2020 by Steffen 'cdp_xe' Wendzel, [www.wendzel.de](https://www.wendzel.de).
 
 ### DISCLAIMER
 
-This tool is for legal purposes only! Read the LICENSE
-file for license details.
+This tool is for legal purposes only! Read the LICENSE file for license details.
 
 I wrote this tool as a 2nd semester undergraduate student in 2006. Expect no amazing code or tool.
 
 ### INTRODUCTION
 
-vstt is a multi-protocol tunneling tool for some free
-unix-like operating systems. it can tunnel TCP
-connections through different network protocols,
-including ICMP and POP3.
+vstt is a multi-protocol tunneling tool for some free unix-like operating systems. it can tunnel TCP connections through different network protocols, including ICMP and POP3.
 
 ### HOW TO COMPILE
 
@@ -32,3 +28,9 @@ Run `make install`.
 
 You can find the documentation in the *doc/* subdirectory (LaTeX and [PDF format](https://github.com/cdpxe/NetworkCovertChannels/blob/master/vstt/doc/doc.pdf)).
 
+### Publications
+
+- For a summary on hiding techniques, check out:
+  - S. Wendzel, S. Zander, B. Fechner, C. Herdin: [Pattern-based survey and categorization of network covert channel techniques](https://doi.org/10.1145/2684195), ACM Computing Survey (CSUR), Vol. 47(3), ACM, 2015.
+- For some comprehensive introduction, see
+  - my [university-level open online class on network information hiding](https://github.com/cdpxe/Network-Covert-Channels-A-University-level-Course).
