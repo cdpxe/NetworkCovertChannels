@@ -1,6 +1,6 @@
 # vstt [Very Strange Tunneling Tool]
 
-(c) 2006 and 2016 by Steffen 'cdp_xe' Wendzel, [www.wendzel.de](https://www.wendzel.de).
+(c) 2006, 2016, 2020 by Steffen 'cdp_xe' Wendzel, [www.wendzel.de](https://www.wendzel.de).
 
 ### DISCLAIMER
 
@@ -30,5 +30,5 @@ Run `make install`.
 
 ### DOCUMENTATION
 
-You can find the documentation in the *doc/* subdirectory (LaTeX and PDF format).
+You can find the documentation in the *doc/* subdirectory (LaTeX and [PDF format](https://github.com/cdpxe/NetworkCovertChannels/blob/master/vstt/doc/doc.pdf)).
 
