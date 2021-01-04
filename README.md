@@ -1,4 +1,4 @@
-# Steffen's Network Covert Channels
+# Steffen's Network Covert Channel Tools
 
 This project contains some of my covert channel projects and also refers to some other repositories where I host my additional covert channel projects.
 
