@@ -21,7 +21,7 @@ If you need an introduction, check out **[my free open online class on network c
 
 ## Tools of my students
 
-- [WiFi Reconnection-based Covert Channel](https://github.com/NIoSaT/WiFi_Reconnection_CovertChannel): My PhD student Sebastian Zillien develop this PoC code for a reconnection-based covert channel that exploits pattern [PT15 (Artificial Reconnections)](https://ih-patterns.blogspot.com/p/pt15-artificial-reconnections.html).
+- [WiFi Reconnection-based Covert Channel](https://github.com/NIoSaT/WiFi_Reconnection_CovertChannel): My PhD student Sebastian Zillien developed this PoC code to demonstrate a WiFi reconnection-based covert channel that exploits pattern [PT15 (Artificial Reconnections)](https://ih-patterns.blogspot.com/p/pt15-artificial-reconnections.html) by forcing WiFi clients to reconnect. The channel can provide anonymity for covert sender and covert receiver.
 
 ## Other Stego Tools
 
