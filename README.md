@@ -19,6 +19,10 @@ If you need an introduction, check out **[my free open online class on network c
 - [CCEAP](https://github.com/cdpxe/CCEAP): *Covert Channel Educational Analysis Protocol* (a tool for teaching network covert channel patterns).
 - [NELphase](https://github.com/cdpxe/NELphase): *Network Environment Learning Phase* (a tool that implements a covert channel capable of performing an network environment learning (NEL) phase and that can be used to test active and passive wardens).
 
+## Tools of my students
+
+- [WiFi Reconnection-based Covert Channel](https://github.com/NIoSaT/WiFi_Reconnection_CovertChannel): My PhD student Sebastian Zillien develop this PoC code for a reconnection-based covert channel that exploits pattern [PT15 (Artificial Reconnections)](https://ih-patterns.blogspot.com/p/pt15-artificial-reconnections.html).
+
 ## Other Stego Tools
 
 - Luca's list of stego tools on Github: [https://github.com/lucacav/steg-tools](https://github.com/lucacav/steg-tools)
