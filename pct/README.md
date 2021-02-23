@@ -4,8 +4,6 @@ This is a proof of concept code for a so-called *[protocol channel](https://www.
 
 PCT was tested using Linux 2.6.27, using gcc version 4.3.2 (4.3.2-1ubuntu11) on amd64 and i686.
 
-My [website](https://steffen-wendzel.blogspot.com/p/covert-channel-software.html#pct) refers to several publications on protocol channels.
-
 LICENSE: GPLv3 (cf. LICENSE file)
 
 ## Scientific Publications on Protocol Channels
