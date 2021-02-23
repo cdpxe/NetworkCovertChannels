@@ -11,7 +11,7 @@ If you need an introduction, check out **[my free open online class on network c
 - [pct](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct): *Protocol Channel Tool* (`pct` a PoC implementation to show that so-called protocol channels are feasible).
 - [phcct](https://github.com/cdpxe/NetworkCovertChannels/tree/master/phcct): *Protocol Hopping Covert Channel Tool* (`phcct` was the first (2007) implementation of a protocol hopping covert channel).
 - [vstt](https://github.com/cdpxe/NetworkCovertChannels/tree/master/vstt): *Very Strange Tunneling Tool* (this was my first network CC tool. I wrote `vstt` as a 2nd semester student. It can tunnel through ICMP, TCP, ...).
-- To-do: upload pcaw: *Protocol Channel-aware Active Warden* (`pcaw` is a countermeasure to reduce the channel capacaity of protocol channels (and protocol hopping covert channels), I wrote this in 2012 as contribution to my PhD thesis).
+- To-do: upload [pcaw](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pcaw): *Protocol Channel-aware Active Warden* (`pcaw` is a countermeasure to reduce the channel capacaity of protocol channels (and protocol hopping covert channels), I wrote this in 2012 as contribution to my PhD thesis).
 
 ## My other covert channel projects on GitHub
 
