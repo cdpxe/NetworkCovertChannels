@@ -2,8 +2,6 @@
 
 This project contains some of my covert channel projects and also refers to some other repositories where I host my additional covert channel projects.
 
-Please see [my website](http://steffen-wendzel.blogspot.com/p/covert-channel-software.html) for an explanation of these tools.
-
 If you need an introduction, check out **[my free open online class on network covert channels](https://github.com/cdpxe/Network-Covert-Channels-A-University-level-Course/)**.
 
 ## In this repository:
