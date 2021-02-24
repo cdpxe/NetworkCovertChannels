@@ -1,8 +1,17 @@
 # PCAW - Protocol Channel-aware Active Warden
 
-`pcaw` limits the efficiency of [protocol channels](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct). In other words, it is an active warden. The code of `pcaw` is currently only available on request via email but will me made public soon.
+`pcaw` limits the efficiency of [protocol channels](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct). In other words, it is an active warden.
 
-Publications:
+### Quick Start
+
+Essentially, one needs to (adjust and) execute the `setup.sh` script and then run one of the limitation scripts:
+
+- `limit_cc.pl` – limitation of protocol switching covert channels (=protocol channels), i.e. covert channels that transfer secret information solely through the utilized protocol of succeeding network packets.
+- `limit_cc_randomized.pl` – same as `limit_cc.pl` but uses a randomized delay for better efficiency.
+- `limit_cc_phcc.pl` – specific PCAW version for *protocol hopping covert channels*, i.e. covert channels that embed secret information *inside the content* of network packets, *but utilize several different network protocols* in a succeeding manner.
+- `limit_cc_bacnet.pl` – specific PCAW version for the BACnet protocol's message ID field. Requires execution of `setup_bacnet.sh`.
+
+### Publications
 
 - Steffen Wendzel, Jörg Keller:
   [Design and Implementation of an Active Warden Addressing Protocol Switching Covert Channels](https://www.researchgate.net/publication/229092168_Design_and_Implementation_of_an_Active_Warden_Addressing_Protocol_Switching_Covert_Channels?ev=srch_pub&_sg=jqQGRsDWfwRzu7RhfH0qyeQvrkpCMNVQeMWb1Tz0vz%2BwbwR5ci7IpZU3suKveg12_4b3SF39cRIxo%2FvLaewvDaviWEZwCs%2FhBWDwockrx9%2FrRu4fpDCTmQTM%2B4jiEJuCS_HXFbseG2qpv10xzxYF88%2FUeD4P07GXAgZpGiIZQlajy%2BI5DZKAj7zjNyDHKR2UT4),
