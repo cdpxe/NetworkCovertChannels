@@ -22,10 +22,11 @@ preferred-citation:
     given-names: "Jörg"
     orcid: "https://orcid.org/0000-0003-0303-6140"
   doi: "10.5281/zenodo.4618133"
-  journal: "International Journalon Advances in Security"
+   conference:
+      name: "International Journal on Advances in Security"
   start: 81 # First page number
   end: 93 # Last page number
-  title: "My awesome research software"
+  title: "Preventing Protocol Switching Covert Channels"
   issue: 5
   volume: 3-4
   year: 2012
