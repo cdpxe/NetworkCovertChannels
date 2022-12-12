@@ -6,6 +6,7 @@ authors:
   orcid: "https://orcid.org/0000-0002-1913-5912"
 - family-names: "Keller"
   given-names: "Jörg"
+  orcid: "https://orcid.org/0000-0003-0303-6140"
 title: "Preventing Protocol Switching Covert Channels"
 version: 1.0.0
 doi: "10.5281/zenodo.4618133"
@@ -19,6 +20,7 @@ preferred-citation:
     orcid: "https://orcid.org/0000-0002-1913-5912"
   - family-names: "Keller"
     given-names: "Jörg"
+    orcid: "https://orcid.org/0000-0003-0303-6140"
   doi: "10.5281/zenodo.4618133"
   journal: "International Journalon Advances in Security"
   start: 81 # First page number
