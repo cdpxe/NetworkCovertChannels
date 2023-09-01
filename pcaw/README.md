@@ -11,11 +11,14 @@ Essentially, one needs to (adjust and) execute the `setup.sh` script and then ru
 - `limit_cc_phcc.pl` – specific PCAW version for *protocol hopping covert channels*, i.e. covert channels that embed secret information *inside the content* of network packets, *but utilize several different network protocols* in a succeeding manner.
 - `limit_cc_bacnet.pl` – specific PCAW version for the BACnet protocol's message ID field. Requires execution of `setup_bacnet.sh`.
 
-### Publications
+### How to Cite this Work?
 
 - Steffen Wendzel, Jörg Keller:
   [Design and Implementation of an Active Warden Addressing Protocol Switching Covert Channels](https://www.researchgate.net/publication/229092168_Design_and_Implementation_of_an_Active_Warden_Addressing_Protocol_Switching_Covert_Channels?ev=srch_pub&_sg=jqQGRsDWfwRzu7RhfH0qyeQvrkpCMNVQeMWb1Tz0vz%2BwbwR5ci7IpZU3suKveg12_4b3SF39cRIxo%2FvLaewvDaviWEZwCs%2FhBWDwockrx9%2FrRu4fpDCTmQTM%2B4jiEJuCS_HXFbseG2qpv10xzxYF88%2FUeD4P07GXAgZpGiIZQlajy%2BI5DZKAj7zjNyDHKR2UT4),
   7th International Conference on Internet Monitoring and Protection (ICIMP 2012), pp. 1-6, Stuttgart, Germany, 2012.
+    - *Paper won the **Best Paper Award** at ICIMP'12*
+
+### Further Scientific Publications on PCAW
 
 - Steffen Wendzel, Sebastian Zander:
   [Detecting Protocol Switching Covert Channels](http://dx.doi.org/10.1109/LCN.2012.6423628),
