@@ -1,4 +1,4 @@
-# Steffen's Network Covert Channel Tools
+# [Steffen Wendzel](https://www.wendzel.de)'s Network Covert Channel Tools
 
 This repository contains some of my covert channel projects and also refers to some other repositories where I host my additional covert channel projects.
 
