@@ -1,5 +1,5 @@
 /*
- * This is the vstt Sourcecode - http://wendzel.de
+ * This is the vstt source code - https://wendzel.de
  *
  * Copyright (c) 2006,2016 Steffen Wendzel, www.wendzel.de
  *       - All rights reserved.
@@ -41,7 +41,7 @@ main(int argc, char *argv[])
 		exit(1);
 	}
 	
-	if(!(fd = open(argv[1], O_RDWR)))
+	if (!(fd = open(argv[1], O_RDWR)))
 		err(1, "open");
 	
 	while (read(fd, buf, 1))
