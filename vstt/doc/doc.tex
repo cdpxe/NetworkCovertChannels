@@ -166,7 +166,7 @@ On the sender, we simply send the input from a system configuration file to the 
 # cat /etc/resolv.conf > /tmp/.vstt_send2peer
 \end{verbatim}
 
-If we now look at the output of the \texttt{reader} on the receiver, we will see
+If we now observe the output of the \texttt{reader} on the receiver, we will see
 the content of \textit{/etc/resolv.conf} that was transferred via ICMP.
 
 
@@ -174,19 +174,19 @@ the content of \textit{/etc/resolv.conf} that was transferred via ICMP.
 
 Let's now use an SSH connection between two hosts over
 port 80 (e.g.\ because some firewall does not block HTTP but SSH).
-We use the protocol '\texttt{none}' because it is fast, works very well. `\texttt{none}'
+We use the protocol '\texttt{none}' because it is fast. `\texttt{none}'
 creates nothing but a plain TCP-based tunnel.
 
 \textcolor{red}{Note: You need \textbf{root} access to bind ports below
 1024 under most Unix(-like) systems.}
 
-This works as follows: both systems start a \texttt{vstt}-tunnel they
+The setup works as follows: both systems start \texttt{vstt} to establish a tunnel they
 can communicate through. On the SSH server, we connect our \texttt{vstt}'s FIFO
 with the SSH service on port 22 (can be done by using the
-\texttt{s2f} tool -- very simple).
+\texttt{s2f} tool).
 
-On the client, machine we use the tool \texttt{s2f}, too (but in server
-mode). \texttt{s2f} communicates with the local \texttt{vstt} endpoint via its FIFO.
+On the client machine, we also use the tool \texttt{s2f} (but in server
+mode so that it accepts the SSH client connection to forward it through the tunnel). \texttt{s2f} communicates with the local \texttt{vstt} endpoint through its FIFO.
 Finally, we connect to the \texttt{s2f} port using our local SSH client.
 
 Okay, let's start.
