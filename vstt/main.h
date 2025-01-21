@@ -1,7 +1,7 @@
 /*
- * This is the vstt Sourcecode - http://wendzel.de
+ * This is the vstt source code - https://wendzel.de
  *
- * Copyright (c) 2006,2016,2020 Steffen Wendzel, www.wendzel.de
+ * Copyright (c) 2006-2025 Steffen Wendzel, www.wendzel.de
  *       - All rights reserved.
  *
  *
@@ -51,8 +51,8 @@
   typedef uint32_t u_int32_t;
 #endif
 
-#define VSTT_VERSION		"0.5.3"
-#define VSTT_PATCHLEVEL		"p1"
+#define VSTT_VERSION		"0.5.4"
+#define VSTT_PATCHLEVEL		"p0"
 #define VSTT_VER		VSTT_VERSION VSTT_PATCHLEVEL
 
 /* fifo paths */
