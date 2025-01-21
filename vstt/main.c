@@ -264,8 +264,6 @@ main(int argc, char *argv[])
 		//init_icmp();
 		break;
 	case P_max:
-		fprintf(stderr, "Uuupps! something went wrong...\n");
-		/* FALLTROUGH */
 	default:
 		printf("TODO: protocol not implemented\n");
 		exit(1);

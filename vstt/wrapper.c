@@ -353,6 +353,7 @@ fork_childs()
 			break;
 		case P_icmp:
 			wrapper_ipraw_client();
+			break;
 		case P_max:
 		default:
 			printf("Houston...\n");
@@ -415,7 +416,6 @@ fork_childs()
 }
 
 /* kill s2f and vstt-child and print err() */
-
 void
 err_kill_friends(int eval, char *str)
 {
