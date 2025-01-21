@@ -1,12 +1,12 @@
 # vstt (*very strange tunneling tool*)
 
-(c) 2006, 2016, 2020 by Steffen 'cdp_xe' Wendzel, [www.wendzel.de](https://www.wendzel.de).
+(c) 2006-2025 by Steffen 'cdp_xe' Wendzel, [www.wendzel.de](https://www.wendzel.de).
 
 ### DISCLAIMER
 
 This tool is for legal purposes only! Read the LICENSE file for license details.
 
-I wrote this tool as a 2nd semester undergraduate student in 2006. Expect no amazing code or tool.
+I wrote this tool as a second semester undergraduate student in 2006. Expect no amazing code or tool.
 
 ### INTRODUCTION
 
@@ -16,9 +16,8 @@ vstt is a multi-protocol tunneling tool for some free unix-like operating system
 
 Run the following command:
 
-- Linux and *BSD:  `make`
+- Linux, *BSD, MacOS:  `make`
 - Solaris: `make solaris`
-- other Unix-like OS: try both :)
 
 ### HOW TO INSTALL
 
@@ -30,7 +29,7 @@ You can find the documentation in the *doc/* subdirectory (LaTeX and [PDF format
 
 ### Publications
 
-- For a summary on hiding techniques, check out:
+- Our summary on covert channel hiding techniques:
   - S. Wendzel, S. Zander, B. Fechner, C. Herdin: [Pattern-based survey and categorization of network covert channel techniques](https://doi.org/10.1145/2684195), ACM Computing Survey (CSUR), Vol. 47(3), ACM, 2015.
-- For some comprehensive introduction, see
+- My comprehensive introduction to network covert channels:
   - my [university-level open online class on network information hiding](https://github.com/cdpxe/Network-Covert-Channels-A-University-level-Course).
