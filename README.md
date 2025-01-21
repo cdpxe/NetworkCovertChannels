@@ -13,7 +13,6 @@ If you need an introduction, check out **[my free open online class on network c
 
 ## My other covert channel projects on GitHub
 
-- [NeFiAS](https://github.com/cdpxe/nefias/): *Network Forensic & Anomaly Detection System* (tool for covert channel/network steganography detection).
 - [CCEAP](https://github.com/cdpxe/CCEAP): *Covert Channel Educational Analysis Protocol* (a tool for teaching network covert channel patterns).
 - [NELphase](https://github.com/cdpxe/NELphase): *Network Environment Learning Phase* (a tool that implements a covert channel capable of performing an network environment learning (NEL) phase and that can be used to test active and passive wardens).
 
