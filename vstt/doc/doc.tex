@@ -50,19 +50,16 @@
 
 \section{Disclaimer}
 
-This tool is for legal educational purposes only! Please also read the LICENSE
-file for license details.
+This tool is for legal educational and research purposes only! Please also read the LICENSE file for license details.
 
 
 \section{Introduction}
 
-Network covert channels enable the stealthy transfer of information over a network. For an introduction, see my free online class on Github: \url{https://github.com/cdpxe/Network-Covert-Channels-A-University-level-Course/}.
+Network covert channels enable a stealthy transfer of information over a network. For an introduction, see my free online class on Github: \url{https://github.com/cdpxe/Network-Covert-Channels-A-University-level-Course/}.
 
-\texttt{vstt} is a tunneling tool (primary for TCP connections). It can send
-your data via different protocols. Please send your patches if you
-port it to new systems or if you fixed a bug.
+\texttt{vstt} is a tunneling tool (primarily for TCP connections). It can send your data via encapsulated in protocols.
 
-\textcolor{red}{I wrote this tool in 2006 as a 2nd semester undergraduate student. It might be far from perfect.}
+\textcolor{red}{I wrote \texttt{vstt} in 2006 as a second semester undergraduate student. It is far from perfect.}
 
 Currently tested systems are:
 
@@ -81,15 +78,11 @@ Currently tested systems are:
 	\item DNS - 5\% done (only stub)
 \end{itemize}
 
-
 \section{How to use it?}
 
-\texttt{vstt} receives input from a source, transfers it over a tunnel to another system
-running \texttt{vstt}, and outputs the received input to a destination.
+\texttt{vstt} receives input from a source, transfers it over a tunnel to another system running \texttt{vstt}, and outputs the received input to a destination.
 
-\texttt{vstt} accepts input either from a local FIFO or from a TCP stream socket that
-you can bind to a port. Similarily, \texttt{vstt} outputs data to a FIFO on the receiver-side or to a TCP
-stream socket that you bind to a port.
+\texttt{vstt} accepts input -- either from a local FIFO or from a TCP stream socket that you can bind to a port. Similarily, \texttt{vstt} outputs data to a FIFO on the receiver-side or to a TCP stream socket that you bind to a port.
 
 If you use local FIFOs for input/output, \texttt{vstt} uses the following files:
 
@@ -99,39 +92,27 @@ binary name | input fifo           | output fifo
 vstt        | /tmp/.vstt_send2peer | /tmp/.vstt_recvfpeer
 \end{verbatim}
 
-You can send data into the connection by writing data into
-the input FIFO and you can read received data from the peer
-via reading from the output FIFO.
+You can send data into the connection by writing data into the input FIFO and you can read received data from the peer by reading from the output FIFO.
 
-\begin{verbatim}
-Q: But I want to use sockets because my TCP app
-   (Telnet or SSH for example) uses TCP and not FIFOs.
-A: No problem: you have to use the s2f tool included in the
-   code -- it bindes a TCP socket to a FIFO!
-\end{verbatim}
+In case you want to use **TCP connections** without interacting with the FIFOs, you can use the tool \texttt{s2f} (short for *socket to FIFO*) that is shipped with \texttt{vstt}. \texttt{s2f} binds a socket to a FIFO.
 
 \section{Examples}
 
-\textcolor{red}{Note: \texttt{vstt} normaly produces one 'connection refused' error every
-second if the other peer is not already available. The error messages will
-disappear once the connection is established.}
+\textcolor{red}{Note: \texttt{vstt} prints one 'connection refused' error every second if the other peer is not already available. The error messages will disappear once the connection is established.}
 
-\subsection{Example 1 (without a TCP connection)}
+\subsection{Example 1 (ICMP tunnel and local FIFOs)}
 
-Let us create a simple ICMP tunnel using \texttt{vstt} on two machines.
-We want to send a file trough the tunnel and read it with the
-shipped tool \texttt{reader}.
+Let us create a simple ICMP tunnel using \texttt{vstt} on two machines. We want to send a file trough the tunnel and read it with the shipped tool \texttt{reader}.
 
 This setup requires different parameters to start \texttt{vstt}:
 
 \begin{verbatim}
-	-p icmp      <- set the protocol to pop3
+	-p icmp      <- set the tunneling cover protocol to ICMP
 	-r n         <- receive data on port n (ignored with ICMP)
 	-t m         <- send data to the peer at port m (ignored with ICMP)
 	-a x         <- the IP address of the peer
 	-m y         <- own IP address
 \end{verbatim}
- 
  
 Setup: We use two Linux machines with the following IPs and will transfer a simple text file.
 
@@ -154,52 +135,40 @@ On the receiver, we run:
 
 \texttt{sudo ./reader /tmp/.vstt\_recvfpeer}
 
-Now, the tunnel setup is complete. The data will be transferred via ICMP
-from sender to receiver and it will be read out from \textit{/tmp/.vstt\_recvfpeer}.
+Now, the tunnel setup is complete. The data will be transferred via ICMP from sender to receiver and it will be read out from \textit{/tmp/.vstt\_recvfpeer}.
 
 Finally, we just need to send the actual data that we want to transfer from the sender to the receiver.
 
-On the sender, we simply send the input from a system configuration file to the pipe:
+On the sender, we simply send the input from a system configuration file to the FIFO:
 
 \begin{verbatim}
 \$ sudo -i
 # cat /etc/resolv.conf > /tmp/.vstt_send2peer
 \end{verbatim}
 
-If we now observe the output of the \texttt{reader} on the receiver, we will see
-the content of \textit{/etc/resolv.conf} that was transferred via ICMP.
+If we now observe the output of the \texttt{reader} on the receiver, we will see the content of the sender's \textit{/etc/resolv.conf} that was transferred via ICMP.
 
 
-\subsection{Example 2 (tunneling an SSH connection)}
+\subsection{Example 2 (tunneling a SSH connection)}
 
-Let's now use an SSH connection between two hosts over
-port 80 (e.g.\ because some firewall does not block HTTP but SSH).
-We use the protocol '\texttt{none}' because it is fast. `\texttt{none}'
-creates nothing but a plain TCP-based tunnel.
+Let's now use a SSH connection between two hosts over port 80 (e.g.\ because some firewall does not block HTTP but SSH). We use the protocol '\texttt{none}' because it is fast. `\texttt{none}' creates nothing but a plain TCP-based tunnel.
 
-\textcolor{red}{Note: You need \textbf{root} access to bind ports below
-1024 under most Unix(-like) systems.}
+\textcolor{red}{Note: You need \textbf{root} access to bind ports below 1024 on most Unix(-like) systems.}
 
-The setup works as follows: both systems start \texttt{vstt} to establish a tunnel they
-can communicate through. On the SSH server, we connect our \texttt{vstt}'s FIFO
-with the SSH service on port 22 (can be done by using the
-\texttt{s2f} tool).
+The setup works as follows: both systems start \texttt{vstt} to establish a tunnel they can communicate through. On the SSH server, we connect our \texttt{vstt}'s FIFO with the SSH service on port 22 (can be done using the \texttt{s2f} tool).
 
-On the client machine, we also use the tool \texttt{s2f} (but in server
-mode so that it accepts the SSH client connection to forward it through the tunnel). \texttt{s2f} communicates with the local \texttt{vstt} endpoint through its FIFO.
-Finally, we connect to the \texttt{s2f} port using our local SSH client.
+On the client machine, we also use the tool \texttt{s2f} (but in server mode, so that it accepts the SSH client's connection to forward the SSH packets through the tunnel). \texttt{s2f} communicates with the local \texttt{vstt} endpoint through its FIFO. Finally, we connect to the \texttt{s2f} port using our local SSH client.
 
 Okay, let's start.
 
-Say that `eygo' (192.168.2.20) is the machine with the SSH-Server and that
-`hikoki' (192.168.2.21) is the server with the SSH client.
+Say that `eygo' (192.168.2.20) is the machine with the SSH-Server and that `hikoki' (192.168.2.21) is the server with the SSH client.
 
-On the first terminal (xterm or a console terminal or whatever), we
-start \texttt{vstt}. We receive data on port 80 and send data to port 80 at
-the other \texttt{vstt}-endpoint.
+\textcolor{red}{FIXME: check that whole setup once more!!!}
+
+On eygo, we start \texttt{vstt}. We receive configure it to receive data on port 80 and to send data to port 80 to the other \texttt{vstt}-endpoint.
 
 \begin{verbatim}
-eygo# ./vstt -p none -r 80 -t 80 -a 192.168.2.20 -m your.ip.goes.here
+eygo# ./vstt -p none -r 80 -t 80 -a 192.168.2.20 -m 192.168.2.21
 client: connecting to peer ...
 server: waiting for connection...
 none(or pop3 and so on)_client: connect(): Connection refused
@@ -211,27 +180,25 @@ none(or pop3 and so on)_client: connect(): Connection refused
 ...
 \end{verbatim}
 
-On the second terminal we start \texttt{s2f}. It will listen on port 10003. We will
-connect to this port with the ssh client if the tunnel works.
+On a second terminal (also on eygo) we start \texttt{s2f}. It will listen on port 10003. We will connect to this port with the SSH client once the tunnel is established.
 
 \begin{verbatim}
 eygo# ./s2f -s -p 10003
 
-IMPORTANT NOTE: If you don't want to start s2f by hand,  you can
+IMPORTANT NOTE: If you don't want to start s2f by hand, you can
                 also let vstt do that by using -c <port> [-s]
                 parameters! Instead of starting vstt+s2f, you could
                 start only vstt in this example:
                 
-                # vstt -p none -r 80 -t 80 -a 192.168.2.20 -c 10003 -s
+                # vstt -p none -r 80 -t 80 -a 192.168.2.20 -m 192.168.2.21 -c 10003 -s
 \end{verbatim}
 
-Please note that the parameter \texttt{-s} means to run as a server and to use the port
-given with \texttt{-p} as the listen port instead as the port to connect to.
+Please note that the parameter \texttt{-s} means to run as a server and to use the port given with \texttt{-p} as the port to listen to instead of the port to connect to.
 
-On eygo, we start \texttt{vstt} too:
+On hikoki, we start \texttt{vstt} too:
 
 \begin{verbatim}
-eygo# ./vstt -p none -r 80 -t 80 -a 192.168.2.21 -m your.ip.goes.here
+hikoki# ./vstt -p none -r 80 -t 80 -a 192.168.2.21 -m 192.168.2.20
 client: connecting to peer ...
 server: waiting for connection...
 wrapper_tcpserver: connection established => waiting for data...
@@ -239,23 +206,21 @@ wrapper_tcpserver: connection established => waiting for data...
 client: waiting for data from fifo...
 \end{verbatim}
 
-And we connect the \texttt{vstt}-FIFOs to the local SSH-Server running on Port 22
-via \texttt{s2f}:
+And we connect the \texttt{vstt}-FIFOs to the local SSH-Server running on Port 22 via \texttt{s2f}:
 
 \begin{verbatim}
-eygo# ./s2f -p 22
+hikoki# ./s2f -p 22
 connected.
 
 IMPORTANT NOTE: You could alternativeley only start vstt one time without
                 calling s2f:
-                # ./vstt -p none -r 80 -t 80 -a 192.168.2.21 -c 22
+                # ./vstt -p none -r 80 -t 80 -a 192.168.2.21 -m 192.168.2.20 -c 22
 \end{verbatim}
 
-And now, you can connect with SSH to the localhost port 10003 on the first
-machine (hikoki).
+And now, you can connect with SSH to the localhost port 10003 on the first machine (eygo).
 
 \begin{verbatim}
-hikoki$ ssh user@127.0.0.1 -p 10003
+eygo$ ssh user@127.0.0.1 -p 10003
 \end{verbatim}
 
 That's it. Your tunnel should be operational now.
@@ -264,31 +229,20 @@ That's it. Your tunnel should be operational now.
 
 \subsection{none}
 
-The `\texttt{none}' protocol is used for a blank tunnel. For example: You sit behind a
-firewall that only lets you use port 80 but you want to connect to your
-IRC-server at home. You can use the `\texttt{none}' protocol to redirect a connection
-over port 80 and then bypass the firewall and enjoy your IRC session.
+The `\texttt{none}' protocol is used for a blank tunnel. For example: You sit behind a firewall that only lets you use port 80 but you want to connect to your IRC-server at home. You can use the `\texttt{none}' protocol to redirect a connection over port 80 and then bypass the firewall and enjoy your IRC session.
 
 \subsection{POP3 (alpha quality)}
 
-This is a little bit more advanced. A `\texttt{pop3}' tunnel is slow but it can hide
-your data in POP3's RETR-requests. If you want to hide your data a little bit:
-use POP3 (or ICMP).
+This is a little bit more advanced. A `\texttt{pop3}' tunnel is slow but it can hide your data in POP3's RETR-requests. If you want to hide your data a little bit: use POP3 (or ICMP).
 
 \subsection{ICMP}
 
-If all TCP+UDP ports are blocked, an ICMP tunnel (`\texttt{icmp}') could work anyway. \texttt{vstt} sends
-your data as payload in ICMP echo datagrams. \textcolor{red}{\texttt{vstt} can re-send lost packets,
-re-calculates the checksum to detect corrupted packets and can
-also send big packets from your applications within many small ICMP packets
-that will be re-assembled by the peer.} In other words, \texttt{vstt}'s ICMP tunnel implements a simple version of a covert channel-internal control protocol\footnote{see S.~Wendzel, J.~Keller: Hidden and Under Control, in: Annales of Telecommunications, 2014. \url{https://link.springer.com/article/10.1007/s12243-014-0423-x}.}.
+If all TCP ports are blocked, an ICMP tunnel (`\texttt{icmp}') could work anyway. \texttt{vstt} sends your data as payload in ICMP echo datagrams. \textcolor{red}{\texttt{vstt} can re-send lost packets, re-calculates the checksum to detect corrupted packets and can also send larger packets from your applications within many small ICMP packets that will be re-assembled by the peer.} In other words, \texttt{vstt}'s ICMP tunnel implements a simple version of a covert channel-internal control protocol\footnote{see S.~Wendzel, J.~Keller: Hidden and Under Control, in: Annales of Telecommunications, 2014. \url{https://link.springer.com/article/10.1007/s12243-014-0423-x}.}.
 
 
 \section{Gateways}
 
-You can use different protocol connections between \texttt{vstt}
-hosts. Here is an example network using three different \texttt{vstt}
-tunnels:
+You can use different protocol connections between \texttt{vstt} hosts. Here is an example network using three different \texttt{vstt} tunnels:
 
 \begin{verbatim}
 Client                                   Destination
@@ -303,8 +257,6 @@ In this scenario, Host2 and Host3 are \texttt{vstt} gateways. As two binaries on
 
 \section{Comments, Feedback}
 
-Please send me feedback, typos, bug reports and requests via GitHub
-to enhance \texttt{vstt}.
+Please send me feedback, typos, bug reports and requests via GitHub to enhance \texttt{vstt}.
 
 \end{document}
-
