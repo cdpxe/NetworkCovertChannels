@@ -45,7 +45,7 @@ int fd[2]; /* pipe for reliability (used in raw socket
 pid_t pid_child;
 pid_t pid_s2f;
 
-/* <Start-Of-Alpha-Quality-Bullshit> */
+/* <Start-Of-Alpha-Quality-B/S> */
 /* This function is still alpha! */
 void
 wrapper_tcpserver()
@@ -76,7 +76,7 @@ wrapper_tcpserver()
 			counter = 0;
 			pkt_len = len;
 			if (my_proto == P_pop3) {
-				/* FIXME: If someone sends bullshit, we'll dump core!!! */
+				/* FIXME: If someone sends b/s, we'll dump core!!! */
 				while (buf[counter] != '\0') { 
 					plain_buf = recv_pop3(buf+counter, &pkt_len);
 					counter+=5;
@@ -118,8 +118,8 @@ wrapper_tcpserver()
 			}
 			bzero(buf, len);
 			
-			/* send a response, that looks usualy */
-			while(send(connfd, pop3_answbuf, strlen(pop3_answbuf), 0) <= 0) {
+			/* send a response that looks usualy */
+			while (send(connfd, pop3_answbuf, strlen(pop3_answbuf), 0) <= 0) {
 				fprintf(stderr, "unable to send response data.\n");
 				usleep(500);
 			}
@@ -127,7 +127,7 @@ wrapper_tcpserver()
 		close(connfd);
 	}
 }
-/* </End-of-Alpha-Quality-Bullshit> */
+/* </End-of-Alpha-Quality-B/S> */
 
 void
 wrapper_rawip_server()
