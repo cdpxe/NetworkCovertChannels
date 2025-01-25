@@ -1,6 +1,6 @@
 # PCAW - Protocol Channel-aware Active Warden
 
-`pcaw` limits the efficiency of [protocol channels](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct). In other words, it is an active warden.
+`pcaw` limits the efficiency of a specific type of network covert channel called [protocol (switching covert) channel](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct). In other words, it is an active warden.
 
 ### Quick Start
 
@@ -31,4 +31,3 @@ Essentially, one needs to (adjust and) execute the `setup.sh` script and then ru
 - Steffen Wendzel:
   [Novel Approaches for Network Covert Storage Channels](https://www.researchgate.net/publication/236962097_Novel_Approaches_for_Network_Covert_Storage_Channels?ev=srch_pub&_sg=rhAuR9KbWdcA4AgO2E1dH6elFP74Vy6GHmVGBzfn%2BEQFywH%2F6Cv6pfzCuR4MhpSK_NQsZFaz4JSMzjjABbqoCxL1XYCV1rbrSl1gLqg2CSqBKm%2FjfEctgeaycWrJCR7Ej_Fj8dUZAMIkg5hu5ghQ5Ydl8tWU1fakPkMOsCtLNDu60GIpU2gYi4vWoyYSJAIVMR),
   PhD thesis, University of Hagen, submitted: Jan-2013, defended: May-2013.
-
