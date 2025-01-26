@@ -89,8 +89,7 @@ do_connect()
 		    sizeof(struct sockaddr_in)) == -1) {
 			perror("connect");
 			close(sockfd);
-			if ((sockfd = socket(AF_INET, SOCK_STREAM, 0))
-			    < 0)
+			if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 				err(1, "socket()");
 			sleep(1);
 		}
@@ -175,8 +174,7 @@ main(int argc, char *argv[])
 /* mainloop */
 	do {
 		if (getpeername(connfd, &name, &namelen) == -1) {
-			if (errno == ENOTCONN || errno == EBADF
-			|| ENOTSOCK) {
+			if (errno == ENOTCONN || errno == EBADF || errno == ENOTSOCK) {
 				/* socket closed || not connected
 				 * => re-connect */
 				printf("s2f: connection closed. re-connecting.\n");
