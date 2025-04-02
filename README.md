@@ -20,7 +20,7 @@ If you need an introduction, check out **[my free open online class on network c
 
 - [DYST](https://github.com/NIoSaT/DYST), 2022-2025: The covert channel that allows *covert channel amplification*. It is also the first implementation of a *history covert channel*.
 - [OPPRESSION](https://github.com/Stego-Punk-Lab/OPPRESSION), 2024: An implementation of a history covert channel that is based on online text repositories.
-- [WiFi Reconnection-based Covert Channel](https://github.com/NIoSaT/WiFi_Reconnection_CovertChannel), 2021: My PhD student Sebastian Zillien developed this PoC code to demonstrate a WiFi reconnection-based covert channel that exploits pattern [PT15 (Artificial Reconnections)](https://ih-patterns.blogspot.com/p/pt15-artificial-reconnections.html) by forcing WiFi clients to reconnect. The channel can provide anonymity for covert sender and covert receiver.
+- [WiFi Reconnection-based Covert Channel](https://github.com/NIoSaT/WiFi_Reconnection_CovertChannel), 2021: My PhD student Sebastian Zillien developed this PoC code to demonstrate a WiFi reconnection-based covert channel that exploits pattern [PT15 (Artificial Reconnections)](https://patterns.omi.uni-ulm.de/NIHPattern/) by forcing WiFi clients to reconnect. The channel can provide anonymity for covert sender and covert receiver.
 - [CoAP Reset-/Reconnection-based Covert Channels](https://github.com/NIoSaT/CoAP-Covert-Channels), 2021: Another tool by my PhD students.
 
 ## Other Stego Tools
