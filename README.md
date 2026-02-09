@@ -6,7 +6,7 @@ If you need an introduction, check out **[my free open online class on network c
 
 ## In this repository:
 
-- N.N. (2026)
+- N.N., 2026, a compression algorithm; will be made public soon.
 - [pcaw](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pcaw), 2012: *Protocol Channel-aware Active Warden* (`pcaw` is a countermeasure to reduce the error-free transmission performance of so-caled *[protocol switching covert channels](https://www.computer.org/csdl/proceedings-article/lcn/2012/06423628/12OmNBC8AyY)*/[pct](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct) (and *[protocol hopping covert channels](https://github.com/cdpxe/NetworkCovertChannels/tree/master/phcct)*). I wrote this in 2012 while working on my PhD thesis).
 - [pct](https://github.com/cdpxe/NetworkCovertChannels/tree/master/pct), 2008: *Protocol Channel Tool* (`pct` a PoC implementation to show that so-called protocol channels/protocol switching covert channels are feasible).
 - [phcct](https://github.com/cdpxe/NetworkCovertChannels/tree/master/phcct), 2007: *Protocol Hopping Covert Channel Tool* (`phcct` was the first (2007) implementation of a protocol hopping covert channel).
