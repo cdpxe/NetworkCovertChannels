@@ -10,6 +10,8 @@ We later renamed PHCC to *multiprotocol* covert channels and refined the concept
 
 * Steffen Wendzel, Jörg Keller: *[Low-attention forwarding for mobile network covert channels](http://www.researchgate.net/profile/Steffen_Wendzel/publication/215661202_Low-attention_Forwarding_for_Mobile_Network_Covert_Channels/links/00b495349285e2ae43000000.pdf)*, in Proc. 12th Conference on Communications and Multimedia Security (CMS 2011), LNCS vol. 7025, pp. 122-133, Springer, Ghent (Belgium), 2011.
 
+Note: There is a [list of network covert channel tools](https://github.com/cdpxe/NetworkCovertChannels).
+
 ## Usage
 
 Start the tool on two hosts and provide the peer address of the other host using the parameter `-a` to allow both hosts to connect to each other:
