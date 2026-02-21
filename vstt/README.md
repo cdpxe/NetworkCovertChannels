@@ -33,3 +33,5 @@ You can find the documentation in the *doc/* subdirectory (LaTeX and [PDF format
   - S. Wendzel, S. Zander, B. Fechner, C. Herdin: [Pattern-based survey and categorization of network covert channel techniques](https://doi.org/10.1145/2684195), ACM Computing Survey (CSUR), Vol. 47(3), ACM, 2015.
 - My comprehensive introduction to network covert channels:
   - my [university-level open online class on network information hiding](https://github.com/cdpxe/Network-Covert-Channels-A-University-level-Course).
+
+Note: There is a [list of network covert channel tools](https://github.com/cdpxe/NetworkCovertChannels).
