@@ -17,7 +17,7 @@ If you need an introduction, check out **[my free open online class on network c
 - [NELphase](https://github.com/cdpxe/NELphase), 2017: *Network Environment Learning Phase* (a tool that implements a covert channel capable of performing an network environment learning (NEL) phase and that can be used to test active and passive wardens).
 - [CCEAP](https://github.com/cdpxe/CCEAP), 2016 (published: ACM CCS'16): *Covert Channel Educational Analysis Protocol* (a tool for teaching network covert channel patterns).
 
-## Tools of my students
+## Tools published together with my students
 
 - [DYST](https://github.com/NIoSaT/DYST), 2022-2025 (published: IEEE TDSC, 2025): This is an implementation of a so-called history covert channel that allows *covert channel amplification*. The code was implemented by two of my PhD students for one of our TDSC papers.
 - [OPPRESSION](https://github.com/Stego-Punk-Lab/OPPRESSION), 2024 (published: ACM AsiaCCS 2024): An implementation of a history covert channel that is based on online text repositories.
