@@ -14,6 +14,7 @@ If you need an introduction, check out **[my free open online class on network c
 ## My other covert channel projects on GitHub
 
 - [AMPhitryon](https://github.com/cdpxe/AMPhitryon), 2026 (published: IFIP SEC 2026, in press), even short packets leave traces, so we need to make them shorter: a compression algorithm for censorship circumvention/covert channels.
+- [AdullamoT](https://github.com/cdpxe/AdullamoT/), 2026 (published: IH&MMSec 2026, in press), using IoT devices as relays for time-decoupled covert data exchange.
 - [NELphase](https://github.com/cdpxe/NELphase), 2017: *Network Environment Learning Phase* (a tool that implements a covert channel capable of performing an network environment learning (NEL) phase and that can be used to test active and passive wardens).
 - [CCEAP](https://github.com/cdpxe/CCEAP), 2016 (published: ACM CCS'16): *Covert Channel Educational Analysis Protocol* (a tool for teaching network covert channel patterns).
 
