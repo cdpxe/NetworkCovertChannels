@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Tool for Describing Steganography Methods (Wendzel et al.: Describing Steganography Hiding Methods by Combining Pre-Existing Methodology, in Proc. ARES 2025 Workshops, Springer, 2025)</title>
+    <!-- Tailwind CDN für schnelles Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cytoscape CDN für den interaktiven Graphen -->
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <style>
+      /* kleine kosmetische Anpassungen */
+      #cy {
+        /* sorgt dafür, dass der Graph nie horizontal scrollt */
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="h-screen flex flex-col bg-gray-100 text-gray-900">
+    <div><strong>Interactive Tool for Describing Steganography Methods</strong> (v. 0.1, 2025-05-31)<br />
+    Cite as: S. Wendzel, C. Kraetzer, J. Dittmann, L. Caviglione, A. Mileva, T. Schmidbauer, C. Vielhauer, S. Zander: <u><a href="https://doi.org/10.1007/978-3-032-00635-6_16">Describing Steganography Hiding Methods by Combining Pre-Existing Methodology</a></u>, in Proc. ARES 2025 Workshops, Springer, 2025.
+    <!-- Oberer Bereich: interaktiver Graph -->
+    <div id="cy" class="h-[60vh] w-full border-b border-gray-700"></div>
+
+    <!-- Unterer Bereich: Infos -->
+    <div class="flex h-[40vh] divide-x divide-gray-700 overflow-hidden">
+      <!-- Linkes Drittel: statische Einführung -->
+      <section class="w-1/3 p-6 overflow-auto">
+        <h1 class="text-2xl font-semibold mb-4">What's this?</h1>
+        <p class="leading-relaxed text-sm">
+          Steganography methods can arise during research or during malware
+          investigation.
+          To aid replicability and understanding, such methods
+          should be described in a comparable manner. Our paper proposes a
+          simple way to achieve that. However, the different components of
+          a steganography method are linked to several attributes which
+          need explanation. Simply click on an item to get more information
+          about it.
+        </p>
+      </section>
+
+      <!-- Mittleres Drittel: primäre Knotenerklärung -->
+      <section class="w-1/3 p-6 overflow-auto" id="node-primary">
+        <h2 id="node-title" class="text-xl font-semibold mb-2">Knoten wählen …</h2>
+        <p id="node-desc" class="text-sm leading-relaxed text-gray-900"></p>
+      </section>
+
+      <!-- Rechtes Drittel: sekundäre Beschreibung -->
+      <section class="w-1/3 p-6 overflow-auto" id="node-secondary-box">
+        <h3 class="text-lg font-semibold mb-2">References</h3>
+        <p id="node-secondary" class="text-sm leading-relaxed text-blue-900"></p>
+      </section>
+    </div>
+
+    <script>
+      const taxoData = {
+        nodes: [
+          {
+            data: {
+              id: "main",
+              label: "Hiding Method",
+              desc: "A hiding method should be described by at least one feature: its hiding pattern. Several optional attributes might be added, describing the reference-temporality, levels, activeness, directness, and locality of a hiding method. A star-property leaves room for freely chosen attributes. Further and surrounding details, such as a threat scenario or required properties of a carrier, should be clarified through the so-called Unified Description Method (UDM), see paper.",
+              secondary: "S. Wendzel, C. Kraetzer, J. Dittmann, L. Caviglione, A. Mileva, T. Schmidbauer, C. Vielhauer, S. Zander: Describing Steganography Hiding Methods by Combining Pre-Existing Methodology, in Proc. ARES 2025 Workshops, Springer, 2025."
+            }
+          },
+          {
+            data: {
+              id: "reftemp",
+              label: "Reference-temporality",
+              desc: "This attribute can be used to specify if secret data is ``moved'' through the channel by means of pointers, that is if the channel points to previously found/written data (history covert channel) or to anticipated (future) data. For instance, a set bit in some network packet might indicate that the previous packet's hash value represent a secret information.",
+              secondary:
+                "Wendzel S, Schmidbauer T, Zillien S, Keller J (2025): DYST (Did You See That?): An Amplified Covert Channel That Points To Previously Seen Data. IEEE Transactions on Dependable and Secure Computing (TDSC) 22/1:614–631, DOI: 10.1109/TDSC.2024.3410679"
+            }
+          },
+          {
+            data: {
+              id: "reftempHist",
+              label: "History",
+              desc: "Previously seen data that represents the secret message is referred instead of transmitted directly. For instance, a set bit in some network packet might indicate that the previous packet's hash value represent a secret information. The idea here is to reach an amplification by embedding a pointer that is smaller than the actual secret message.",
+              secondary:
+                "Wendzel S, Schmidbauer T, Zillien S, Keller J (2025): DYST (Did You See That?): An Amplified Covert Channel That Points To Previously Seen Data. IEEE Transactions on Dependable and Secure Computing (TDSC) 22/1:614–631, DOI: 10.1109/TDSC.2024.3410679"
+            }
+          },
+          {
+            data: {
+              id: "reftempPresent",
+              label: "- (Present)",
+              desc: "No other data is referred to. In other words, the secret data is directly embedded into the cover object. This applies to most hiding methods.",
+              secondary:
+                "Wendzel S, Schmidbauer T, Zillien S, Keller J (2025): DYST (Did You See That?): An Amplified Covert Channel That Points To Previously Seen Data. IEEE Transactions on Dependable and Secure Computing (TDSC) 22/1:614–631, DOI: 10.1109/TDSC.2024.3410679"
+            }
+          },
+          {
+            data: {
+              id: "reftempFuture",
+              label: "Future",
+              desc: "The embedded secret bitstring refers to future (anticipated) data. For instance, a regular sensor value update is anticipated in 1sec and we send a 1-bit pointer that refers to the anticipated sensor value. The idea here is to reach an amplification by embedding a pointer that is smaller than the actual secret message.",
+              secondary:
+                "Wendzel S, Schmidbauer T, Zillien S, Keller J (2025): DYST (Did You See That?): An Amplified Covert Channel That Points To Previously Seen Data. IEEE Transactions on Dependable and Secure Computing (TDSC) 22/1:614–631, DOI: 10.1109/TDSC.2024.3410679"
+            }
+          },
+          {
+            data: {
+              id: "levels",
+              label: "Levels",
+              desc: "Multiple authors proposed nesting steganographic objects inside other steganography objects, leading to multiple levels (or layers) of steganography. Multi-level steganography can be found in different domains, including filesystem steganography and network steganography. Multi-level steganography can be used to reach a plausible deniability, where the outer steganography level is presented to an observer, but inner levels are not revealed and kept secret. This attribute denotes whether the steganography method establishes a multi-level steganography system, or not. The attribute should be omitted if it is a single-level system.",
+              secondary: "Masud, M.A., Akter, S., Sultana, N., Yousuf, M.A., Uddin, M.Z.: Multi-layered password-based steganography: A novel approach for tiered information hiding. techxiv (2024). ||||||| Fraczek, W., Mazurczyk, W., Szczypiorski, K.: Multi-level steganography: Improv-ing hidden communication in networks. Journal of Universal Computer Science (J.UCS) 18(14), 1967–1986 (2012)."
+            }
+          },
+          {
+            data: {
+              id: "levelsSingle",
+              label: "- (Single-level)",
+              desc: "No multi-level steganography is present. This applies to most hiding methods.",
+              secondary: ""
+            }
+          },
+          {
+            data: {
+              id: "levelsMulti",
+              label: "Multi-level Steganography",
+              desc: "The hiding method embeds a secret message into another secret message. This might be repeated multiple times to nest several levels of steganography objects inside each other.",
+              secondary: "Masud, M.A., Akter, S., Sultana, N., Yousuf, M.A., Uddin, M.Z.: Multi-layered password-based steganography: A novel approach for tiered information hiding. techxiv (2024). ||||||| Fraczek, W., Mazurczyk, W., Szczypiorski, K.: Multi-level steganography: Improv-ing hidden communication in networks. Journal of Universal Computer Science (J.UCS) 18(14), 1967–1986 (2012)."
+            }
+          },
+          {
+            data: {
+              id: "pattern",
+              label: "Hiding Pattern",
+              desc: "An abstract description of how a hiding method works.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E1",
+              label: "E1. State/\nValue Modulation",
+              desc: "The covert message is embedded by modulating the state or value of an element, such as a frame, packet, header element, payload field etc.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E2",
+              label: "E2. Element Occurrence",
+              desc: "The covert message is encoded in the spatial or temporal location of elements, which can also, e.g., influence the rate or overall number of elements).",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E11",
+              label: "E1.1. Reserved/Unused State/\nValue Modulation",
+              desc: "quote: ``The covert message is embedded by modulating reserved/unused states/values of elements''. See reference for examples.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E12",
+              label: "E1.2. Random State/\nValue Modulation",
+              desc: "quote: ``A (pseudo-) random value or state is replaced with a secret message (that also follows a pseudo-random appearance).'' See reference for examples.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E13",
+              label: "E1.3. LSB State/\nValue Modulation",
+              desc: "quote: ``The LSBs of elements are modulated.'' See reference for examples.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E14",
+              label: "E1.4. Character State/\nValue Modulation",
+              desc: "quote: ``The features of characters in elements are modulated.'' See reference for examples.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E15",
+              label: "E1.5. Redundancy State/\nValue Modulation",
+              desc: "quote: ``The redundancy of an element’s content is modulated (this is usually applied by a succeeding pattern that fills the gained space with covert data), e.g., by means of compression.'' See reference for examples.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E21",
+              label: "E2.1. Element Enumeration",
+              desc: "quote: ``An attribute describing the quantity of sub-elements is modulated. This pattern is also applied when the size of an element is increased by adding more sub-elements to an element (e.g., adding more payload characters or additional header components to a network packet or by adding additional characters to a text).'' See reference for examples.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "E22",
+              label: "E2.2. Element Positioning",
+              desc: "quote: ``The covert message is embedded by inserting or changing the temporal/spatial position of an element (this temporal/spatial position might be described through a virtual element.''. See reference for examples.",
+              secondary: "S. Wendzel, L. Caviglione, W. Mazurczyk, A. Mileva, J. Dittmann, C. Krätzer, K. Lamshöft, C. Vielhauer, L. Hartmann, J. Keller, T. Neubert, S. Zillien (2025): A Generic Taxonomy for Steganography Methods, ACM Computing Surveys."
+            }
+          },
+          {
+            data: {
+              id: "EA",
+              label: "Activeness",
+              desc: "quote: ``This attribute defines whether the channel is active (must not be mentioned explicitly) or passive. Here, the passivity terms (semi-active, semi-passive, fully-passive) can be be placed in brackets behind the ``passive'' attribute.'' Explanation (also quoted from the paper but slightly modified): ``Covert senders do not necessarily need to create their own cover objects to embed data into, nor must covert receivers necessarily be the overt recipients of a cover object (see Zi et al.). In this perspective, an active channel is one where the covert sender creates the cover object and the covert receiver is the overt recipient. In contrast, a passive channel would require a covert sender to modify a third-party cover object to embed the secret message into and the covert receiver to recognize the embedded message (e.g., as an on-path attacker). It is also possible to create channels of mixed form (semi-active (see Lamshöft and Dittmann) and semi-passive (see Zander)). In some cases fully-passive channels can be created (as introduced by Wendzel et al.). In such cases, the cover object is untouched by sender and receiver. Instead, the sender solely ``points'' to the cover object and the receiver observes the traffic through eavesdropping or as a broadcast receiver.''. See reference for examples.",
+              secondary: "Zi, X., Yao, L., Pan, L., Li, J.: Implementing a passive network covert timing channel. Computers & Security 29(6), 686–696 (2010). |||||| Lamshöft, K., Dittmann, J.: Assessment of hidden channel attacks: Targetting Modbus/TCP. IFAC-PapersOnLine 53(2) (2020).  ||||||  Zander, S.: Performance of selected noisy covert channels and their countermeasures in IP networks. Ph.D. thesis, Swinburne Univ. (2010) ||||||  Wendzel, S., Schmidbauer, T., Zillien, S., Keller, J.: DYST (did you see that?): An amplified covert channel that points to previously seen data. IEEE Transactions on Dependable and Secure Computing (TDSC) (2024)."
+            }
+          },
+          {
+            data: {
+              id: "EAactive",
+              label: "Active",
+              desc: "The covert sender creates the cover object and the covert receiver is the recepient of the cover object.",
+              secondary: "Zander, S.: Performance of selected noisy covert channels and their countermeasures in IP networks. Ph.D. thesis, Swinburne Univ. (2010)."
+            }
+          },
+          {
+            data: {
+              id: "EAnotactive",
+              label: "semi-active, semi-passive, \npassive, or fully-passive",
+              desc: "Here, one either uses the attribute ``semi-active'', ``semi-passive'', ``passive'', or ``fully-passive'': Quote from the paper: ``A passive channel would require a covert sender to modify a third-party cover object to embed the secret message into and the covert receiver to recognize the embedded message (e.g., as an on-path attacker). It is also possible to create channels of mixed form (semi-active (see Lamshöft and Dittmann) and semi-passive (see Zander)). In some cases fully-passive channels can be created (as introduced by Wendzel et al.). In such cases, the cover object is untouched by sender and receiver. Instead, the sender solely ``points'' to the cover object and the receiver observes the traffic through eavesdropping or as a broadcast receiver.''. See reference for examples.",
+              secondary: "Lamshöft, K., Dittmann, J.: Assessment of hidden channel attacks: Targetting Modbus/TCP. IFAC-PapersOnLine 53(2) (2020).  ||||||  Zander, S.: Performance of selected noisy covert channels and their countermeasures in IP networks. Ph.D. thesis, Swinburne Univ. (2010) ||||||  Wendzel, S., Schmidbauer, T., Zillien, S., Keller, J.: DYST (did you see that?): An amplified covert channel that points to previously seen data. IEEE Transactions on Dependable and Secure Computing (TDSC) (2024)."
+            }
+          },
+          {
+            data: {
+              id: "EDirectedness",
+              label: "Directness",
+              desc: "quote: ``Some steganography methods, including network techniques for the creation of covert channels, are designed to establish indirect paths for secret messages, i.e., the covert sender does not directly send data to the covert receiver (cf. Zander's papers). When the covert communication path does not behave in a direct end-to-end flavor and is based on the (involuntary) integration of a third-party node, the channel can be described by three indirect hiding patterns (redirector, proxy, and dead drop) as introduced by (Schmidbauer and Wendzel)''.",
+              secondary: "Zander, S.: Performance of selected noisy covert channels and their countermeasures in IP networks. Ph.D. thesis, Swinburne Univ. (2010) ||||||  Schmidbauer, T., Wendzel, S.: SoK: A survey of indirect network-level covert channels. In: Proc. 17th Asia Conf. Computer and Communications Security (ASIACCS). pp. 546–560. ACM (2022)."
+            }
+          },
+          {
+            data: {
+              id: "EDirectedness:Direct",
+              label: "- (Direct)",
+              desc: "The channel is a direct one, i.e., sender transfers the cover object to receiver without utilizing an intermediate node.",
+              secondary: "Zander, S.: Performance of selected noisy covert channels and their countermeasures in IP networks. Ph.D. thesis, Swinburne Univ. (2010) |||||| Schmidbauer, T., Wendzel, S.: SoK: A survey of indirect network-level covert channels. In: Proc. 17th Asia Conf. Computer and Communications Security (ASIACCS). pp. 546–560. ACM (2022)."
+            }
+          },
+          {
+            data: {
+              id: "EDirectedness:Indirect",
+              label: "Indirect",
+              desc: "quote: ``When the covert communication path does not behave in a direct end-to-end flavor and is based on the (involuntary) integration of a third-party node, the channel can be described by three indirect hiding patterns (redirector, proxy}, and dead drop) as introduced by (Schmidbauer and Wendzel).''",
+              secondary: "Schmidbauer, T., Wendzel, S.: SoK: A survey of indirect network-level covert channels. In: Proc. 17th Asia Conf. Computer and Communications Security (ASIACCS). pp. 546–560. ACM (2022)."
+            }
+          },
+          {
+            data: {
+              id: "ELocality",
+              label: "Locality",
+              desc: "quote: ``Local steganography channels do not rely on distributing the secret message over multiple cover objects nor do they apply multiple hiding methods to the same cover object.''",
+              secondary: "-"
+            }
+          },
+          {
+            data: {
+              id: "ELocality:Local",
+              label: "- (Local)",
+              desc: "quote: ``Local steganography channels do not rely on distributing the secret message over multiple cover objects nor do they apply multiple hiding methods to the same cover object.''",
+              secondary: "-"
+            }
+          },
+          {
+            data: {
+              id: "ELocality:Distributed",
+              label: "Distributed",
+              desc: "quote: ``The following terms were proposed in (Wendzel et al., 2015) to describe distributed hiding methods using patterns: Pattern variation refers to techniques that apply the same hiding pattern to different carrier objects, e.g., least significant bit modulation to a field in the IPv4 and the IPv6 header, without needed a whole new implementation. Pattern combination applies multiple hiding patterns to the same carrier object (e.g., embedding a secret bit into the least significant bit of a timestamp in a file's metadata while embedding additional secret data into unused metadata bits). Finally, pattern hopping refers to the (pseudo-randomized) alternation of hiding methods. Mazurczyk et al. (2018) slightly extended these terms in by further splitting pattern variation into host-, flow- and protocol-based scattering, which represent approaches specific for network steganography. The core idea is to distribute secret message bits to different hosts, through multiple flows or through multiple protocols.''",
+              secondary: "Wendzel, S., Zander, S., Fechner, B., Herdin, C.: Pattern-based survey and categorization of network covert channel techniques. Comp. Surveys 47(3) (2015). |||||| Mazurczyk, W., Wendzel, S., Cabaj, K.: Towards deriving insights into data hiding methods using pattern-based approach. In: Proc. ARES’18. pp. 10:1–10. ACM (2018)."
+            }
+          },
+          {
+            data: {
+              id: "Estar",
+              label: "* (Star Property)",
+              desc: "quote: ``This attribute is a star property (*) that allows arbitrary details to be added. For instance, one might employ terms like cover selection (Fridich, 2009) or coverless steganography (Liu et al., 2024; Zhou et al., 2019). Another option is to state whether a channel is a unidirectional, bidirectional, or broadcast channel. If desired, one might explicitly mention robustness criteria, e.g., whether the channel is noisy or noise-free or if the cover is predictable, variable, or randomized as mentioned by (Zander, 2010). Finally, one might state that a hiding method is reversible (see several references in our paper), i.e., if an (intermediate) covert receiver can restore the cover object to its status before a secret message was embedded.''",
+              secondary: "Fridrich, J.: Steganography in Digital Media: Principles, Algorithms, and Applications. Cambridge University Press (2009). |||||| Liu, H., Zhang, C., Wang, Z., Guo, C., Gou, P., Shan, L., Lu, Z.: To deliver more information in coverless information hiding. Multim. Tools Appl. 83(3), 7215–7229 (2024) |||||| Zhou, Z., Mu, Y., Wu, Q.M.J.: Coverless image steganography using partialduplicate image retrieval. Soft Comput. 23(13), 4927–4938 (2019)"
+            }
+          },
+        ],
+        edges: [
+          { data: { id: "e1", source: "main", target: "reftemp" } },
+          { data: { id: "e1rh", source: "reftemp", target: "reftempHist" } },
+          { data: { id: "e1rp", source: "reftemp", target: "reftempPresent" } },
+          { data: { id: "e1rf", source: "reftemp", target: "reftempFuture" } },
+          { data: { id: "e2", source: "main", target: "levels" } },
+          { data: { id: "e2ls", source: "levels", target: "levelsSingle" } },
+          { data: { id: "e2lm", source: "levels", target: "levelsMulti" } },
+          { data: { id: "e3", source: "main", target: "pattern" } },
+          { data: { id: "e3E1", source: "pattern", target: "E1" } },
+          { data: { id: "e3E11", source: "E1", target: "E11" } },
+          { data: { id: "e3E12", source: "E1", target: "E12" } },
+          { data: { id: "e3E13", source: "E1", target: "E13" } },
+          { data: { id: "e3E14", source: "E1", target: "E14" } },
+          { data: { id: "e3E15", source: "E1", target: "E15" } },
+          { data: { id: "e3E2", source: "pattern", target: "E2" } },
+          { data: { id: "e3E21", source: "E2", target: "E21" } },
+          { data: { id: "e3E22", source: "E2", target: "E22" } },
+          { data: { id: "e4", source: "main", target: "EA" } },
+          { data: { id: "e4a", source: "EA", target: "EAactive" } },
+          { data: { id: "e4na", source: "EA", target: "EAnotactive" } },
+          { data: { id: "e5", source: "main", target: "EDirectedness" } },
+          { data: { id: "e5d", source: "EDirectedness", target: "EDirectedness:Direct" } },
+          { data: { id: "e5i", source: "EDirectedness", target: "EDirectedness:Indirect" } },
+          { data: { id: "e6", source: "main", target: "ELocality" } },
+          { data: { id: "e6l", source: "ELocality", target: "ELocality:Local" } },
+          { data: { id: "e6d", source: "ELocality", target: "ELocality:Distributed" } },
+          { data: { id: "e7", source: "main", target: "Estar" } },
+        ]
+      };
+
+      // --- Cytoscape-Initialisierung ---------------------------------------
+      const cy = cytoscape({
+        container: document.getElementById("cy"),
+        elements: [...taxoData.nodes, ...taxoData.edges],
+        style: [
+          {
+            selector: "node",
+            style: {
+              content: "data(label)",
+              "text-valign": "center",
+              "text-halign": "center",
+              "background-color": "#4f46e5", // indigo-600
+              color: "#f9fafb",
+              "font-size": "12px",
+              "font-weight": "bold",
+              width: "label",
+              height: 2.5*"label",
+              "text-wrap": "wrap",
+              padding: "6px",
+              "border-width": 2,
+              "border-color": "#c4b5fd", // indigo-300
+            }
+          },
+          {
+            selector: "edge",
+            style: {
+              width: 1.5,
+              "line-color": "#9ca3af", // gray-400
+              "target-arrow-color": "#9ca3af",
+              "target-arrow-shape": "triangle"
+            }
+          },
+          {
+            selector: "node:selected",
+            style: {
+              "background-color": "#10b981", // emerald-500
+              "border-color": "#6ee7b7"
+            }
+          }
+        ],
+        layout: {
+          name: "breadthfirst",
+          roots: ["main"],
+          padding: 10,
+          spacingFactor: 0.78
+        },
+        autoungrabify: true,
+        minZoom: 0.2,
+        maxZoom: 2,
+        wheelSensitivity: 0.5
+      });
+
+      // --- Event-Handling ---------------------------------------------------
+
+
+      cy.on("tap", "node", (evt) => {
+        const node = evt.target.data();
+        document.getElementById("node-title").textContent = node.label;
+        document.getElementById("node-desc").textContent = node.desc;
+        document.getElementById("node-secondary").textContent = node.secondary;
+      });
+
+      // Optional: Beim ersten Laden Root-Knoten auswählen
+      cy.ready(() => {
+        cy.zoom(0.9);
+        cy.center();
+        const root = cy.getElementById("main");
+        if (root) {
+          root.select();
+          document.getElementById("node-title").textContent = root.data("label");
+          document.getElementById("node-desc").textContent = root.data("desc");
+          document.getElementById("node-secondary").textContent = root.data("secondary");
+          //cy.getElementById("main").successors().targets().style("display", "none");
+        }
+      });
+
+      cy.on('tap', 'node', function(){
+      //if the node's children have been hidden
+      //getting the element at 1 because the element at 0 is the node itself
+      //want to check if its children are hidden
+      if (this.connectedEdges().targets()[1].style("display") == "none"){
+          //show the nodes and edges
+          //cy.fit();
+          this.connectedEdges().targets().style("display", "element");
+      } else {
+          //hide the children nodes and edges recursively
+          // cy.fit();
+          this.successors().targets().style("display", "none");
+          cy.fit();
+      }
+});
+
+    </script>
+  </body>
+</html>
