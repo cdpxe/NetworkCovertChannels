@@ -15,12 +15,13 @@ If you need an introduction, check out **[my free open online class on network c
 ## My other covert channel projects on GitHub
 
 - [AMPhitryon](https://github.com/cdpxe/AMPhitryon), 2026 (published: IFIP SEC 2026), even short packets leave traces, so we need to make them shorter: a compression algorithm for censorship circumvention/covert channels.
-- [AdullamoT](https://github.com/cdpxe/AdullamoT/), 2026 (published: IH&MMSec 2026, in press), using IoT devices as relays for time-decoupled covert data exchange.
+- [AdullamoT](https://github.com/cdpxe/AdullamoT/), 2026 (published: IH&MMSec 2026), using IoT devices as relays for time-decoupled covert data exchange.
 - [NELphase](https://github.com/cdpxe/NELphase), 2017: *Network Environment Learning Phase* (a tool that implements a covert channel capable of performing an network environment learning (NEL) phase and that can be used to test active and passive wardens).
 - [CCEAP](https://github.com/cdpxe/CCEAP), 2016 (published: ACM CCS'16): *Covert Channel Educational Analysis Protocol* (a tool for teaching network covert channel patterns).
 
 ## Tools published together with my students
 
+- [Silent History Protocol](https://github.com/gXeeXqBHuHDFTaEnff3Z/SHP), 2026 (published: Journal of Information Security and Applications, 2026): This is a implementation of *covert channel amplification* using network flows instead of single packets (that are used in the case of *DYST*).
 - [DYST](https://github.com/NIoSaT/DYST), 2022-2025 (published: IEEE TDSC, 2025): This is an implementation of a so-called history covert channel that allows *covert channel amplification*. The code was implemented by two of my PhD students for one of our TDSC papers.
 - [OPPRESSION](https://github.com/Stego-Punk-Lab/OPPRESSION), 2024 (published: ACM AsiaCCS 2024): An implementation of a history covert channel that is based on online text repositories.
 - [WiFi Reconnection-based Covert Channel](https://github.com/NIoSaT/WiFi_Reconnection_CovertChannel), 2021 (published: IFIP SEC 2021): My PhD student Sebastian Zillien developed this PoC code to demonstrate a WiFi reconnection-based covert channel that exploits pattern [PT15 (Artificial Reconnections)](https://patterns.omi.uni-ulm.de/NIHPattern/) by forcing WiFi clients to reconnect. The channel can provide anonymity for covert sender and covert receiver.
