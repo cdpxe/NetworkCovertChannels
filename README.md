@@ -22,6 +22,7 @@ If you need an introduction, check out **[my free open online class on network c
 ## Tools published together with my students
 
 - [Silent History Protocol](https://github.com/gXeeXqBHuHDFTaEnff3Z/SHP), 2026 (published: Journal of Information Security and Applications, 2026): This is a implementation of *covert channel amplification* using network flows instead of single packets (that are used in the case of *DYST*).
+- [Network StegAnalysis Warden](https://github.com/Stego-Punk-Lab/steganalysis-warden), 2026 (published: CUING 2026): An active warden to analyze and counter stegomalware in research laboratories.
 - [DYST](https://github.com/NIoSaT/DYST), 2022-2025 (published: IEEE TDSC, 2025): This is an implementation of a so-called history covert channel that allows *covert channel amplification*. The code was implemented by two of my PhD students for one of our TDSC papers.
 - [OPPRESSION](https://github.com/Stego-Punk-Lab/OPPRESSION), 2024 (published: ACM AsiaCCS 2024): An implementation of a history covert channel that is based on online text repositories.
 - [WiFi Reconnection-based Covert Channel](https://github.com/NIoSaT/WiFi_Reconnection_CovertChannel), 2021 (published: IFIP SEC 2021): My PhD student Sebastian Zillien developed this PoC code to demonstrate a WiFi reconnection-based covert channel that exploits pattern [PT15 (Artificial Reconnections)](https://patterns.omi.uni-ulm.de/NIHPattern/) by forcing WiFi clients to reconnect. The channel can provide anonymity for covert sender and covert receiver.
